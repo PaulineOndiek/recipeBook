@@ -19,8 +19,16 @@ border:none;
 }
 `
 const LoginInput=styled.input`
+display:flex;
+border:2px solid white;
+align-items:center;
+border-radius:20px;
+padding:1em 2em;
+outline:none;
+&:active{
+    border:1px solid #DB254E;
+}
 
-margin:2em;
 `
 
 
@@ -68,8 +76,8 @@ console.log(error)
             </Input>
             <Button onClick={handleLogin}>Login</Button>
         </Container>
-        
         </LoginContainer>
     )
 }
+
 export default Login

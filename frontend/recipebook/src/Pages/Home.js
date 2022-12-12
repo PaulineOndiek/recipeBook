@@ -1,9 +1,11 @@
 import styled from "styled-components"
 import Nav from "../Components/Nav"
+import Category from "../Components/Category";
+import Categories from "../Components/Categories";
 import RoomServiceIcon from '@mui/icons-material/RoomService';
-import image1 from "../Images/recipe.avif"
-import image2 from "../Images/dishes.avif"
-import image3 from "../Images/vegetables.jpeg"
+// import image1 from "../Images/recipe.avif"
+// import image2 from "../Images/dishes.avif"
+import { useEffect, useState } from "react";
 const HomeContainer=styled.div`
 background:#F9F9F9;`
 const Container=styled.div`
@@ -12,7 +14,7 @@ width:80%;
 box-shadow: 0 0 2em solid #FFFFFF;
 padding:2em;`
 const MainContainer=styled.div`
-background: url(https://images.pexels.com/photos/616401/pexels-photo-616401.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2);
+background:url(https://images.pexels.com/photos/616401/pexels-photo-616401.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2);
 height:80vh;
 width:80vw;
 background-position:center;
@@ -62,7 +64,15 @@ const Head=styled.h2`padding-left:2em;
 
 
 const Home=()=>{
-    return(
+// useEffect=(()=>{
+//     const handlePostRecipe=async()=>{
+//     const response=await fetch ("localhost:http//8000/recipe/new")
+//     const data=await response.json()
+
+// }
+// }
+// ,[])
+     return(
         <HomeContainer>
             <Nav/>
             <Container>
@@ -80,6 +90,8 @@ const Home=()=>{
                    </IconDiv>
                    </IconContainer>
                 </MainContainer>
+                <Category/>
+                <Categories/>
 
             </Container>
 

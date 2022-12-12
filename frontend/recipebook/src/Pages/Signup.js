@@ -45,14 +45,13 @@ const Head=styled.h2`
 color:white;
 font-weight:bold;`
 const Input=styled.input`
-// border-radius:20px;
-// padding:1em 2em;
 outline:none;
 border:none;
 background:inherit;
 // &:active{
 //     border:1px solid #DB254E;
 // }`
+
 const Inputs=styled.div`
 display:flex;
 border:2px solid white;

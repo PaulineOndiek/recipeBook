@@ -7,6 +7,7 @@ const addRecipe=async(req,res)=>{
             name:req.body.name,
             cookTime:req.body.cookTime,
             servings:req.body.servings,
+            image:req.body.image,
             instructions:req.body.instructions,
             ingredients:req.body.ingredients
         })
