@@ -3,9 +3,8 @@ import Nav from "../Components/Nav"
 import Category from "../Components/Category";
 import Categories from "../Components/Categories";
 import RoomServiceIcon from '@mui/icons-material/RoomService';
-// import image1 from "../Images/recipe.avif"
-// import image2 from "../Images/dishes.avif"
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext} from "react";
+import { Context } from "../Context/States";
 const HomeContainer=styled.div`
 background:#F9F9F9;`
 const Container=styled.div`
@@ -64,14 +63,23 @@ const Head=styled.h2`padding-left:2em;
 
 
 const Home=()=>{
-// useEffect=(()=>{
-//     const handlePostRecipe=async()=>{
-//     const response=await fetch ("localhost:http//8000/recipe/new")
-//     const data=await response.json()
+    const {food}=useContext(Context)
+const [recipe,setRecipe]=food
+   
+useEffect=(()=>{
+fetch("http://localhost:8000/api/recipes/new")
+      .then((res) => {
+        return res.json();
+      })
+      .then((data) => {
+        // console.log(data)
+        setRecipe(data);
+     
+      });
 
-// }
-// }
-// ,[])
+    // .catch(err=>console.log(err))
+  }, []);
+
      return(
         <HomeContainer>
             <Nav/>
@@ -90,13 +98,12 @@ const Home=()=>{
                    </IconDiv>
                    </IconContainer>
                 </MainContainer>
-                <Category/>
-                <Categories/>
+                <Category recipe={recipe}/>
+                <Categories recipe={recipe}/>
 
             </Container>
-
-
         </HomeContainer>
     )
 }
+
 export default Home

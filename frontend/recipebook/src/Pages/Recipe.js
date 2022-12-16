@@ -2,10 +2,13 @@ import styled from "styled-components"
 import Nav from "../Components/Nav"
 import { useState } from "react"
 import { useRef } from "react"
-const RecipeContainer=styled.div`
+const RecipeContainer=styled.div`cd
 background:#F9F9F9;`
-const Container=styled.div`width:80%;
-margin:0 auto;`
+const Container=styled.div`
+margin:0 auto;
+width:80%;
+display:flex;
+gap:4em;`
 const RecipeInput=styled.div`
 display:flex;
 flex-direction:column;
@@ -14,6 +17,12 @@ width:50%;
 `
 const Para=styled.p``
 
+const FirstInputs=styled.div`
+width:50%;
+display:flex;
+flex-direction:column;
+gap:2em;
+`
 const Input=styled.input`
 padding:2em 1em;
 border-radius:5px;
@@ -141,8 +150,21 @@ console.log(error)
         <RecipeContainer>
         <Nav/>
         <Container>
+          <FirstInputs>
+            <Input type="text" placeholder="Name:"/>
+            <Input type="text" placeholder="Cook Time"/>
+            <Input type="text" placeholder="Servings"/>
+            <TextArea placeholder="Instructions"></TextArea>
+             <Input type="text" placeholder="Ingredients"/>
+             <Input type="file"/>
+          </FirstInputs>
+
+
+
             <RecipeInput>
                 {error &&<Para>{error}</Para>}
+
+                
                 <Input className={empty.includes("name")?"error":""} type="text" placeholder="Name:" value={upload.name} onChange={(e)=>setUpload(prev=>({...prev,name:e.target.value}))}/>
                 <Input className={empty.includes("cookTime")?error:""} type="text" placeholder="Cook Time" value={upload.cookTime} onChange={(e)=>setUpload(prev=>({...prev,cookTime:e.target.value}))}  />
                 <Input className={empty.includes("servings")?"error":""} type="text" placeholder="Servings" value={upload.servings} onChange={(e)=>setUpload(prev=>({...prev,servings:e.target.value}))}/>

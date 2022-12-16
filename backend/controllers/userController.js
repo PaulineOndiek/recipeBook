@@ -32,7 +32,19 @@ const registerUser =async()=>{
        
 
     }
-    catch{
-
+    catch(error){
+        res.json(error)
+        
     }
 }
+
+const loginUser=async(req,res)=>{
+try{
+
+}
+catch{
+    
+}
+}
+
+module.exports={registerUser,loginUser}

@@ -2,20 +2,28 @@ import styled from "styled-components"
 import image3 from "../Images/vegetables.jpeg"
 const Container=styled.div``
 const ImgContainer=styled.div``
-const Img=styled.img``
+const Image=styled.img``
 const Description=styled.p``
 const Time=styled.p``
+const Para=styled.p``
 
 
-const Categories=()=>{
+const Categories=({recipe})=>{
     return(
         <>
         <Container>
+            {recipe && recipe.map(recipeData=>{
+                return(
             <ImgContainer>
-            <Img src="image3"/>
-            <Description>Grilled Chicken salad with veggies</Description>
-            <Time></Time>
+            <Image src={recipeData.image}/>
+            <Para>{recipeData.name}</Para>
+            <Para>{recipeData.ingredients}</Para>
+            <Description>{recipeData.instructions}</Description>
+            <Time>{recipeData.cookTime}</Time>
+            
             </ImgContainer>
+            )
+            })}
         </Container>
         </>
     )
