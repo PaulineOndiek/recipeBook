@@ -39,14 +39,26 @@ const registerUser=async()=>{
     }
 }
 
-const loginUser=async(req,res)=>{
-try{
-    
 
-}
-catch{
-    
-}
+const loginUser = async (req, res) => {
+    try {
+        const { email, password } = req.body
+        const userExists = await User.findOne({ email:email })
+        if (!userExists) {
+            return res.status(404).json({ error: "The user does not exist" })
+        }
+        const checkPassword = await bcrypt.compare(password, userExists.password)
+        if (!checkPassword) {
+            return res.status(404).json({ error: "Incorrect password" })
+        }
+
+        const loginToken = createToken(userExists._id)
+
+        return res.status(200).json({ userExists, loginToken })
+
+    } catch (error) {
+        return res.json(error)
+    }
 }
 
 module.exports={registerUser,loginUser}
