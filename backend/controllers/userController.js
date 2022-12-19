@@ -6,7 +6,8 @@ const jwt=require("jsonwebtoken")
 const createToken=(id)=>{
     return jwt.sign({id},process.env.JWT_PASSWORD, {expiresIn: "3d"})
 }
-const registerUser =async()=>{
+
+const registerUser=async()=>{
     try{
         const {userName, email,password}=body.require
         const UserExists=await User.findOne({email:email})
@@ -40,6 +41,7 @@ const registerUser =async()=>{
 
 const loginUser=async(req,res)=>{
 try{
+    
 
 }
 catch{

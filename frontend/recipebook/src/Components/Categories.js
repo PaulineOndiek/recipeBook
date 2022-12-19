@@ -1,31 +1,40 @@
 import styled from "styled-components"
-import image3 from "../Images/vegetables.jpeg"
-const Container=styled.div``
-const ImgContainer=styled.div``
-const Image=styled.img``
-const Description=styled.p``
-const Time=styled.p``
+const CategoryContainer=styled.div``
+const Container=styled.div`
+margin:0 auto;
+width:80%;
+`
+
+const ImgContainer=styled.div`
+width:100%;
+height:50%;
+`
+
+const Image=styled.img`
+width:90%;
+height:100%;
+border-radius:10px;
+box-shadow:0 0 2px grey;
+object-fit:cover;
+`
+
 const Para=styled.p``
+
 
 
 const Categories=({recipe})=>{
     return(
-        <>
+        <CategoryContainer>
         <Container>
-            {recipe && recipe.map(recipeData=>{
-                return(
             <ImgContainer>
-            <Image src={recipeData.image}/>
-            <Para>{recipeData.name}</Para>
-            <Para>{recipeData.ingredients}</Para>
-            <Description>{recipeData.instructions}</Description>
-            <Time>{recipeData.cookTime}</Time>
-            
+                <Image  src={recipe&&recipe[0].image}/>
             </ImgContainer>
-            )
-            })}
+                <Para>{recipe && recipe[1].name}</Para>
+                 <Para>{recipe && recipe[1].instructions}</Para>   
+                 <Para>{recipe && recipe[1].cookTime}</Para>
+                
         </Container>
-        </>
+        </CategoryContainer>
     )
 }
 export default Categories

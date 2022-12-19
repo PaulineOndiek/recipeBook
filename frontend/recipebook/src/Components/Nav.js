@@ -36,12 +36,12 @@ const Nav=()=>{
                 <NavUl>
                     <NavLeft>
                         
-                <NavList><a to="/">Home</a></NavList>
-                <NavList><a to="/recipe">Recipe</a></NavList>
+                <NavList><Link to="/">Home</Link></NavList>
+                <NavList><Link to="/recipe">Recipe</Link></NavList>
                 </NavLeft>
                 <NavRight>
-                <NavList><a to="/signup">Signup</a></NavList>
-                <NavList><a to="/login">Login</a></NavList>
+                <NavList><Link to="/signup">Signup</Link></NavList>
+                <NavList><Link to="/login">Login</Link></NavList>
                 </NavRight>
                 </NavUl>
             </Container>

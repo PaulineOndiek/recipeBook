@@ -47,6 +47,7 @@ font-weight:bold;`
 const Input=styled.input`
 outline:none;
 border:none;
+color:white;
 background:inherit;
 // &:active{
 //     border:1px solid #DB254E;
@@ -59,9 +60,10 @@ align-items:center;
 border-radius:20px;
 padding:1em 2em;
 outline:none;
-&:active{
-    border:1px solid #DB254E;
-}`
+width:40%;
+// &:active{
+//     border:1px solid #DB254E;
+// }`
 const PasswordContainer=styled.div``
 const PasswordShower=styled.div``
 const ShowPassword=styled.div``

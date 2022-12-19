@@ -66,18 +66,18 @@ const Home=()=>{
     const {food}=useContext(Context)
 const [recipe,setRecipe]=food
    
-useEffect=(()=>{
-fetch("http://localhost:8000/api/recipes/new")
+useEffect(()=>{
+fetch("http://localhost:8000/api/recipes")
       .then((res) => {
         return res.json();
       })
       .then((data) => {
-        // console.log(data)
+        console.log(data)
         setRecipe(data);
      
-      });
+      })
 
-    // .catch(err=>console.log(err))
+     .catch(err=>console.log(err))
   }, []);
 
      return(
@@ -85,6 +85,7 @@ fetch("http://localhost:8000/api/recipes/new")
             <Nav/>
             <Container>
                 <MainContainer>
+                  {console.log(recipe)}
                   
                     <IconContainer>
                     <ParaDiv>

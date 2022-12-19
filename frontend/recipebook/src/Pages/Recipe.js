@@ -15,7 +15,7 @@ flex-direction:column;
 gap:2em;
 width:50%;
 `
-const Para=styled.p``
+
 
 const FirstInputs=styled.div`
 width:50%;
@@ -23,6 +23,13 @@ display:flex;
 flex-direction:column;
 gap:2em;
 `
+
+const Head=styled.h2``
+
+const Para=styled.p`
+
+`
+const Image=styled.img``
 const Input=styled.input`
 padding:2em 1em;
 border-radius:5px;
@@ -47,6 +54,7 @@ width:20%;
 border-radius:5px;
 margin-left:15em;
 color:#DB254E;
+cursor:pointer
 `
 
 const Recipe=()=>{
@@ -65,7 +73,7 @@ const [error,setError]=useState(null)
     const handleImageUpload=(e)=>{
         const file = e.target.files[0];
     const formData = new FormData();
-  const CLOUDINARY_URL = 'https://api.cloudinary.com/v1_1/recipe/image/upload';
+  const CLOUDINARY_URL = 'https://api.cloudinary.com/v1_1/dsrjy1hwe/image/upload';
   const CLOUDINARY_UPLOAD_PRESET = 'recipe';
   
     formData.append('file', file);
@@ -91,9 +99,11 @@ const [error,setError]=useState(null)
       
   
   }
+
   const handleAddRecipe=async()=>{
+
 try{
-  if(upload.name===""|| upload.cookTime===""||upload.image===""||upload.ingredients===""||upload.servings===""||upload.instructions===""){
+  if(upload.name===""||upload.cookTime===""||upload.ingredients===""||upload.servings===""||upload.instructions===""||upload.image===""){
     setError("Please fill out all the required fields")
   }
 
@@ -151,30 +161,31 @@ console.log(error)
         <Nav/>
         <Container>
           <FirstInputs>
-            <Input type="text" placeholder="Name:"/>
-            <Input type="text" placeholder="Cook Time"/>
-            <Input type="text" placeholder="Servings"/>
-            <TextArea placeholder="Instructions"></TextArea>
-             <Input type="text" placeholder="Ingredients"/>
-             <Input type="file"/>
+          <Image src={upload.image}/>
+           <Head>{upload.name}</Head> 
+            <Para>{upload.cookTime}</Para>
+            <Para>{upload.servings}</Para>
+            <Para>{upload.instructions}</Para>
+             <Para type="text" placeholder="Ingredients">{upload.ingredients}</Para>
+             
           </FirstInputs>
 
 
 
             <RecipeInput>
                 {error &&<Para>{error}</Para>}
-
-                
+                <Input className={empty.includes("image")?"error":""}type="file" ref={imageRef} onChange={(e)=>{handleImageUpload(e)}}/>
                 <Input className={empty.includes("name")?"error":""} type="text" placeholder="Name:" value={upload.name} onChange={(e)=>setUpload(prev=>({...prev,name:e.target.value}))}/>
                 <Input className={empty.includes("cookTime")?error:""} type="text" placeholder="Cook Time" value={upload.cookTime} onChange={(e)=>setUpload(prev=>({...prev,cookTime:e.target.value}))}  />
                 <Input className={empty.includes("servings")?"error":""} type="text" placeholder="Servings" value={upload.servings} onChange={(e)=>setUpload(prev=>({...prev,servings:e.target.value}))}/>
                 <TextArea className={empty.includes("instructions")?"error":""}placeholder="Instructions" value={upload.instructions} onChange={(e)=>setUpload(prev=>({...prev,instructions:e.target.value}))}></TextArea>
-                <Input className={empty.includes("ingredients")?"error":""}type="text" placeholder="Ingredients" value={upload.ingredients} onChange={(e)=>setUpload(prev=>({...prev,ingredients:e.target.value}))}/>
-                <Input className={empty.includes("image")?"error":""}type="file" ref={imageRef} onChange={(e)=>{handleImageUpload(e)}}/>
-                <Button onClick={handleAddRecipe}>Add Recipe</Button>
+                <TextArea className={empty.includes("ingredients")?"error":""}type="text" placeholder="Ingredients" value={upload.ingredients} onChange={(e)=>setUpload(prev=>({...prev,ingredients:e.target.value}))}></TextArea>
+                
+                <Button onClick={handleAddRecipe} disabled={upload.image === ""}>Add Recipe</Button>
             </RecipeInput>  
         </Container>
         </RecipeContainer>
     )
 }
+
 export default Recipe
