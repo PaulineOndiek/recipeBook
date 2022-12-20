@@ -4,7 +4,7 @@ const validator=require("validator")
 const jwt=require("jsonwebtoken")
 
 const createToken=(id)=>{
-    return jwt.sign({id},process.env.JWT_PASSWORD, {expiresIn: "3d"})
+    return jwt.sign({id},process.env.JWT_SECRET, {expiresIn: "3d"})
 }
 
 const registerUser=async()=>{
@@ -29,7 +29,10 @@ const registerUser=async()=>{
             password:hash
         })
         const savedMember=await newMember.save()
-        return res.status(200).json(savedMember)
+        const token = createToken(savedMember._id)
+        res.status(201).json({ savedUser, token })
+
+        // return res.status(200).json(savedMember)
        
 
     }
