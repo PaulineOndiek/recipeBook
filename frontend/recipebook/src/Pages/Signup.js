@@ -3,6 +3,7 @@ import styled from "styled-components"
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import Nav from "../Components/Nav"
+import { useNavigate } from "react-router-dom";
 const SignupContainer=styled.div`
 background:#F9F9F9;
 `
@@ -78,31 +79,48 @@ outline:none;`
 
 
 const Signup=()=>{
-const [fill, setFill]=useState({
+const [user, setUser]=useState({
 username:"",
 nationality:"",
 email:"",
 password:""
 })
+
 const [error,setError]=useState(null)
 const [empty,setEmpty]=useState([])
 const [show,setShow]=useState(false)
-const handleSign=()=>{
-if(fill.username==="" || fill.nationality==="" || fill.email==="" || fill.password===""){
+//useNavigate
+const navigate=useNavigate()
+
+const handleSign=async()=>{
+if(user.username==="" || user.nationality==="" || user.email==="" || user.password===""){
    setError ("Please fill all the required fields")
 }
 
-if (fill.username===""){
+if (user.username===""){
     empty.push("username")
 }
-if(fill.nationality===""){
+if(user.nationality===""){
     empty.push("nationality")
 }
-if (fill.email===""){
+if (user.email===""){
    empty.push("email") 
 }
-if(fill.password===""){
+if(user.password===""){
     empty.push("password")
+}
+else{
+    const newUser=await fetch ("http://localhost:8000/api/user/register",{
+        method:"POST",
+        headers:{"Content-Type":"application/json"},
+        body:JSON.stringify(user)
+    }
+    )
+    const json=await newUser.json()
+    if (!json.ok){
+        setError(json.error)
+    }
+    navigate("/")
 }
 }
 
@@ -117,20 +135,20 @@ if(fill.password===""){
         <Head>Sign Up!</Head>
         <Para>{error}</Para>
         <Inputs>
-        <Input className={empty.includes("username")?error:""} type="text" placeholder="Username" onChange={(e)=>setFill(prev=>({...prev, username:e.target.value}))}/>
+        <Input className={empty.includes("username")?error:""} type="text" placeholder="Username" onChange={(e)=>setUser(prev=>({...prev, username:e.target.value}))}/>
         </Inputs>
 
         <Inputs>
-        <Input className={empty.includes("nationality")?error:""}   type="text" placeholder="Nationality" onChange={(e)=>setFill(prev=>({...prev, nationality:e.target.value}))} />
+        <Input className={empty.includes("nationality")?error:""}   type="text" placeholder="Nationality" onChange={(e)=>setUser(prev=>({...prev, nationality:e.target.value}))} />
         </Inputs>
 
         <Inputs>
-        <Input className={empty.includes("email")?error:""}  type="email" placeholder="Email Address" onChange={(e)=>setFill(prev=>({...prev,email:e.target.value}))} />
+        <Input className={empty.includes("email")?error:""}  type="email" placeholder="Email Address" onChange={(e)=>setUser(prev=>({...prev,email:e.target.value}))} />
         </Inputs>
 
         <Inputs>
             <PasswordContainer>
-        <Input className={empty.includes("password")?error:""} type={show?"text":"password"} placeholder="Password" onChange={(e)=>setFill(prev=>({...prev,password:e.target.value}))} />
+        <Input className={empty.includes("password")?error:""} type={show?"text":"password"} placeholder="Password" onChange={(e)=>setUser(prev=>({...prev,password:e.target.value}))} />
         </PasswordContainer>
         <PasswordShower>
         <ShowPassword onClick={() => setShow((prev) => !prev)}/>

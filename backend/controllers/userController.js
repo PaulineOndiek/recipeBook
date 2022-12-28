@@ -1,5 +1,6 @@
-const User=require("../models/user")
+
 const bcrypt=require("bcrypt")
+const User=require("../models/User")
 const validator=require("validator")
 const jwt=require("jsonwebtoken")
 
@@ -7,30 +8,34 @@ const createToken=(id)=>{
     return jwt.sign({id},process.env.JWT_SECRET, {expiresIn: "3d"})
 }
 
-const registerUser=async()=>{
+const registerUser=async(req,res)=>{
     try{
-        const {userName, email,password}=body.require
+        const {userName, email,password}=req.body
+        //to check whether or not the user exists
         const UserExists=await User.findOne({email:email})
         if(UserExists){
-            return res.json("This User already exists")
+            return res.json({error:"This User already exists"})
 
         }
         if(!validator.isEmail(email)){
-            return res.json("This is not a valid Password")
+            return res.json({error:"This is not a valid Email Address"})
         }
         if(!validator.isStrongPassword(password)){
-            return res.json("Please enter a strong password")
+            return res.json({error:"Please enter a strong password"})
         }
         const salt=await bcrypt.genSalt(10)
         const hash=await bcrypt.hash(password, salt)
-        const newMember=await new User({
+
+        const newMember= new User({
             userName,
             email,
             password:hash
         })
+
         const savedMember=await newMember.save()
+
         const token = createToken(savedMember._id)
-        res.status(201).json({ savedUser, token })
+        res.status(201).json({ savedMember, token })
 
         // return res.status(200).json(savedMember)
        

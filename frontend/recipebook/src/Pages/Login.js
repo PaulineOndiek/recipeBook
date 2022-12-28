@@ -46,15 +46,39 @@ const Login=()=>{
         email:"",
         password:""
     })
-    const [error,setError]=useState()
+    const [error,setError]=useState("")
+    const navigate=useNavigate()
 
-    const handleLogin=()=>{
+    const handleLogin=async()=>{
 try{
     if(user.email===""|| user.password===""){
         setError("Please Fill all the required fields")
 
     }
+    else{
+    setError("")
+    
+    const url=await ("http://localhost:8000/api/user/login")
+    const options={
+        method:"POST",
+        headers:{"Content-Type":"application/json"},
+        body:JSON.stringify(user)
+    }
+    const user=await fetch(url,options)
+    const jsonResponse=await user.json()
+    
+    if (!user.ok){
+        setError(jsonResponse.error)
 
+    }
+    if (user.ok){
+        console.log(jsonResponse)
+        //navigation
+        navigate("/recipe")
+        localStorage.setItem("loginUser",JSON.stringify(jsonResponse))
+        JSON.parse(localStorage.getItem("loginUser"))
+    }
+}
 }
 catch(error){
 console.log(error)

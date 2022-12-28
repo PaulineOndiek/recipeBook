@@ -17,7 +17,7 @@ const addRecipe=async(req,res)=>{
 
     catch(error){
          res.json(error)
-
+        console.log(error)
     }
 }
 
@@ -29,6 +29,18 @@ return res.status(201).json(allRecipes)
 catch(error){
 res.json(error)
 
+}
+}
+
+const singleRecipe=async()=>{
+try{
+    const{id}=req.params
+    const oneRecipe=await Recipe.findById(id)
+    res.status(201).json(oneRecipe)
+
+}
+catch{
+    res.json(error)
 }
 }
 
@@ -69,4 +81,4 @@ const deleteRecipe=async()=>{
 }
 
 
-module.exports={addRecipe, getRecipe, editRecipe, deleteRecipe}
+module.exports={addRecipe, getRecipe, singleRecipe,editRecipe, deleteRecipe}
