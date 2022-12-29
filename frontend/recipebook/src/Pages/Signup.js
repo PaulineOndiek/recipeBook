@@ -143,7 +143,7 @@ else{
         </Inputs>
 
         <Inputs>
-        <Input className={empty.includes("email")?error:""}  type="email" placeholder="Email Address" onChange={(e)=>setUser(prev=>({...prev,email:e.target.value}))} />
+        <Input className={empty.includes("email")?error:""} type="email" placeholder="Email Address" onChange={(e)=>setUser(prev=>({...prev,email:e.target.value}))} />
         </Inputs>
 
         <Inputs>

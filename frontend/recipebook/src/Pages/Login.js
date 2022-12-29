@@ -1,4 +1,5 @@
 import { useState } from "react"
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components"
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
@@ -46,6 +47,8 @@ const Login=()=>{
         email:"",
         password:""
     })
+    const [empty,setEmpty]=useState()
+
     const [error,setError]=useState("")
     const navigate=useNavigate()
 
@@ -55,6 +58,15 @@ try{
         setError("Please Fill all the required fields")
 
     }
+
+    if (user.email===""){
+        empty.push("email")
+    }
+     
+    if(user.password===""){
+        empty.push("password")
+    }
+
     else{
     setError("")
     
@@ -91,11 +103,11 @@ console.log(error)
         <Container>
             <Para>{error}</Para>
             <Input>
-            <LoginInput type="email" placeholder="Email Address" />
+            <LoginInput className={empty.includes("email")?error:""} type="email" placeholder="Email Address" onChange={(e)=>setUser(prev=>({...prev,email:e.target.value}))}  />
             </Input>
 
              <Input>
-            <LoginInput type={show?"text":"password"} placeholder="Password"/>
+            <LoginInput className={empty.includes("password")?error:""} type={show?"text":"password"} placeholder="Password" onChange={(e)=>setUser(prev=>({...prev,password:e.target.value}))} />
             {show?<VisibilityOffIcon/>:<VisibilityIcon/>}
             </Input>
             <Button onClick={handleLogin}>Login</Button>
