@@ -5,31 +5,56 @@ import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import Nav from "../Components/Nav"
 const LoginContainer=styled.div`
-background:#F9F9F9;`
+background:#F6F6F6;
+height:100vh;
+`
+const LogContainer=styled.div`
+background:linear-gradient(rgba(0,0,0,.8),rgba(0,0,0,.8)),url(https://images.pexels.com/photos/8896107/pexels-photo-8896107.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2);
+margin:0 auto;
+height:90vh;
+width:50vw;
+background-position:center center;
+background-size:cover;
+background-repeat:no repeat;
+background-size:cover;
+border-radius:5px;
+object-fit:cover;
+`
 const Container=styled.div`
 margin:0 auto;
-width:80%;`
-const Para=styled.p``
-const Input=styled.div`
-padding:1em 2em;
-outline:none;
-border:none;
-
-&:active{
-    border:1px solid #DB254E;
-}
+width:80%;
+box-shadow: 0 0 3em white; `
+const MainContainer=styled.div`
+display:flex;
+justify-content:center;
 `
-const LoginInput=styled.input`
+const InputContainer=styled.div`
+display:flex;
+flex-direction:column;
+width:50%;
+gap:2em;
+align-items:center;
+border-radius:10px;`
+
+const Para=styled.p`
+color:white;
+font-size:large;`
+const Input=styled.div`
 display:flex;
 border:2px solid white;
 align-items:center;
 border-radius:20px;
 padding:1em 2em;
 outline:none;
-&:active{
-    border:1px solid #DB254E;
-}
+width:60%;
 
+}
+`
+const LoginInput=styled.input`
+outline:none;
+border:none;
+color:white;
+background:inherit;
 `
 
 
@@ -43,11 +68,12 @@ outline:none;`
 
 const Login=()=>{
     const [show,setShow]=useState()
+    
     const [user,setUser]=useState({
         email:"",
         password:""
     })
-    const [empty,setEmpty]=useState()
+    const [empty,setEmpty]=useState([])
 
     const [error,setError]=useState("")
     const navigate=useNavigate()
@@ -96,21 +122,33 @@ catch(error){
 console.log(error)
 }
     }
-
     return(
         <LoginContainer>
             <Nav/>
         <Container>
+        <LogContainer>
+            <MainContainer>
+                
+                <InputContainer>
             <Para>{error}</Para>
+            <Para>Welcome Back,</Para>
+            <Para>Login!</Para>
             <Input>
             <LoginInput className={empty.includes("email")?error:""} type="email" placeholder="Email Address" onChange={(e)=>setUser(prev=>({...prev,email:e.target.value}))}  />
             </Input>
 
              <Input>
-            <LoginInput className={empty.includes("password")?error:""} type={show?"text":"password"} placeholder="Password" onChange={(e)=>setUser(prev=>({...prev,password:e.target.value}))} />
+            <LoginInput  className={empty.includes("password")?error:""} 
+            type={show?"text":"password"} placeholder="Password" 
+            onChange={(e)=>setUser(prev=>({...prev,password:e.target.value}))}
+             />
             {show?<VisibilityOffIcon/>:<VisibilityIcon/>}
             </Input>
             <Button onClick={handleLogin}>Login</Button>
+            </InputContainer>
+            
+            </MainContainer>
+            </LogContainer>
         </Container>
         </LoginContainer>
     )

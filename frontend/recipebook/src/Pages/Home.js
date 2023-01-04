@@ -2,6 +2,7 @@ import styled from "styled-components"
 import Nav from "../Components/Nav"
 import Category from "../Components/Category";
 import Categories from "../Components/Categories";
+import Popular from "../Components/Popular";
 import RoomServiceIcon from '@mui/icons-material/RoomService';
 import { useEffect, useState, useContext} from "react";
 import { Context } from "../Context/States";
@@ -13,7 +14,8 @@ width:80%;
 box-shadow: 0 0 2em solid #FFFFFF;
 padding:2em;`
 const MainContainer=styled.div`
-background:url(https://images.pexels.com/photos/616401/pexels-photo-616401.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2);
+background:#FFFFFF;
+background: linear-gradient(rgba(0,0,0,.7),rgba(0,0,0,.7)), url(https://images.pexels.com/photos/616401/pexels-photo-616401.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2);
 height:80vh;
 width:80vw;
 background-position:center;
@@ -45,7 +47,8 @@ const ParaDiv=styled.div`
 color:#474848;
 font-size:large;
 font-weight:bold;`
-const Para=styled.p`padding-left:4em;`
+const Para=styled.p`padding-left:4em;
+color:#F6F6F6;`
 const IconDiv=styled.div`
 display:flex;
 align-items:center;
@@ -59,6 +62,7 @@ margin:0 auto;
 padding-top:10em;
 `
 const Head=styled.h2`padding-left:2em;
+color:white;
 `
 
 
@@ -101,7 +105,7 @@ fetch("http://localhost:8000/api/recipes")
                 </MainContainer>
                 <Category recipe={recipe}/>
                 <Categories recipe={recipe}/>
-
+                <Popular recipe={recipe}/>
             </Container>
         </HomeContainer>
     )

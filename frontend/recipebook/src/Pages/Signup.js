@@ -13,9 +13,10 @@ width:80%;
 
 `
 const SignContainer=styled.div`
-background:linear-gradient(rgba(0,0,0,.6),rgba(0,0,0,.6)),url(https://images.pexels.com/photos/370984/pexels-photo-370984.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2);
-height:80vh;
-width:80vw;
+background:linear-gradient(rgba(0,0,0,.8),rgba(0,0,0,.8)),url(https://images.pexels.com/photos/323682/pexels-photo-323682.jpeg?auto=compress&cs=tinysrgb&w=800);
+margin:0 auto;
+height:90vh;
+width:50vw;
 background-position:center center;
 background-size:cover;
 background-repeat:no repeat;
@@ -34,9 +35,7 @@ display:flex;
 flex-direction:column;
 width:50%;
 gap:2em;
-// box-shadow:0 0 2px white;
 align-items:center;
-// background:white;
 border-radius:10px;
 `
 const Para=styled.p`
@@ -50,9 +49,7 @@ outline:none;
 border:none;
 color:white;
 background:inherit;
-// &:active{
-//     border:1px solid #DB254E;
-// }`
+ }`
 
 const Inputs=styled.div`
 display:flex;
@@ -62,9 +59,7 @@ border-radius:20px;
 padding:1em 2em;
 outline:none;
 width:40%;
-// &:active{
-//     border:1px solid #DB254E;
-// }`
+}`
 const PasswordContainer=styled.div``
 const PasswordShower=styled.div``
 const ShowPassword=styled.div``

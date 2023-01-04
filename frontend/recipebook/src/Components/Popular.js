@@ -32,25 +32,25 @@ display:flex;
 align-items:center;`
 
 
-const Category=({recipe})=>{
+const Popular=({recipe})=>{
     return(
         <CategoryContainer>
           
         <Container>
-        <Head>New Recipes</Head>
+        <Head>Popular Recipes</Head>
           <InfoContainer>
           
-        {recipe && recipe.map(recipeInfo=>{
+        {recipe && recipe.map(Recipe=>{
             return(      
                 <Div>
          <ImageContainer>
-          <Image src={recipeInfo.image}/>
+          <Image src={Recipe.image}/>
           </ImageContainer>
           <NameContainer>
-          <Name>{recipe &&recipeInfo.name}</Name>
+          <Name>{Recipe &&Recipe.name}</Name>
           <Name> 
             <AccessTimeIcon/>   
-          {recipeInfo.cookTime}
+          {Recipe.cookTime}
           </Name> 
           </NameContainer>
           </Div>
@@ -64,4 +64,5 @@ const Category=({recipe})=>{
         </CategoryContainer>
     )
 }
-export default Category
+export default Popular
+
